@@ -1,0 +1,38 @@
+{
+    "name": "gmartino/breadcrumb-labels-uid",
+    "type": "typo3-cms-extension",
+    "description": "Restores the pre-v14 backend behaviour of appending the record uid to breadcrumb labels.",
+    "license": "GPL-2.0-or-later",
+    "keywords": ["TYPO3 CMS", "backend", "breadcrumb"],
+    "authors": [
+        {
+            "name": "Gianluigi Martino",
+            "email": "gmartino@gmartino.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "typo3/cms-core": "^14.0",
+        "typo3/cms-backend": "^14.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gmartino\\BreadcrumbLabelsUid\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gmartino\\BreadcrumbLabelsUid\\Tests\\": "Tests/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "breadcrumb_labels_uid",
+            "version": "1.0.0",
+            "Package": {
+                "providesPackages": {}
+            }
+        }
+    }
+}
