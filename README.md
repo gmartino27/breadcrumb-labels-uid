@@ -10,6 +10,17 @@ Since TYPO3 v14 the backend breadcrumb no longer shows the record uid. This
 extension brings it back without patching the core, as a drop-in package that
 can be installed via Composer.
 
+## Screenshots
+
+The record uid is shown again in the backend breadcrumb — for pages and records,
+in both the Page and Records modules:
+
+![Page module breadcrumb showing the page uid, e.g. "Camino [1]"](Documentation/Images/breadcrumb-page.png)
+
+![Page module breadcrumb showing the current record uid, e.g. "Camino Route Comparison … [7]"](Documentation/Images/breadcrumb-subpage.png)
+
+![Records module breadcrumb showing a record uid, e.g. "Footer navigation [2]"](Documentation/Images/breadcrumb-records.png)
+
 ## How it works
 
 The core `TYPO3\CMS\Backend\Breadcrumb\RecordBreadcrumbProvider` is `final` and
