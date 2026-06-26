@@ -21,6 +21,14 @@ jobs:
         id: version
         run: echo "number=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
 
+      - name: Verify TER token is available
+        run: |
+          if [ -z "${TYPO3_API_TOKEN}" ]; then
+            echo "::error::Secret TYPO3_API_TOKEN is empty or not reaching the job. Add it under Settings → Secrets and variables → Actions → tab 'Secrets' (not 'Variables'), as a repository secret named exactly TYPO3_API_TOKEN."
+            exit 1
+          fi
+          echo "TYPO3_API_TOKEN is present (length: ${#TYPO3_API_TOKEN})."
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
