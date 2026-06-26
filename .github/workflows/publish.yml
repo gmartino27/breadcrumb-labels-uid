@@ -1,0 +1,37 @@
+name: Publish to TER
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  publish:
+    name: Publish new version to TER
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    env:
+      TYPO3_EXTENSION_KEY: breadcrumb_labels_uid
+      TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: version
+        run: echo "number=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: intl, mbstring, zip
+          tools: composer:v2
+
+      - name: Install tailor
+        run: composer global require typo3/tailor
+
+      - name: Publish ${{ steps.version.outputs.number }} to TER
+        run: |
+          export PATH="$(composer global config bin-dir --absolute):$PATH"
+          tailor ter:publish --comment "Released by GitHub Actions" "${{ steps.version.outputs.number }}"
